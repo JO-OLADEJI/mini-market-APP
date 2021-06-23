@@ -1,0 +1,63 @@
+#Nav {
+  min-height: 10vh;
+  width: 100vw;
+  padding: 1rem 10vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Cabin Sketch', cursive;
+  box-shadow: 0 5px 10px #979797c2;
+  background-color: #008737;
+}
+
+.logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 30%;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.logo img {
+  margin-right: .5rem;
+}
+
+.search-container {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-container input {
+  margin-right: .5rem;
+  border: 2px solid #ffffff;
+  padding: .5rem 1.5rem;
+  background-color: #008737;
+  border-radius: .5rem;
+  width: 20rem;
+  font-family: 'Josefin Sans', sans-serif;
+  color: #ffffff;
+}
+
+.search-container input::placeholder {
+  color: #ffffff;
+}
+
+.search-container button {
+  background-color: #F5FAF5;
+  border: none;
+  padding: .2rem .5rem;
+  margin-right: .2rem;
+  font-family: 'Josefin Sans', sans-serif;
+  border-radius: .2rem;
+  cursor: pointer;
+}
+
+.nav-buttons {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
