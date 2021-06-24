@@ -1,4 +1,6 @@
 import React from 'react';
+import category from '../assets/category.png';
+import location from '../assets/location.png';
 
 
 const MarketCard = (props) => {
@@ -8,10 +10,16 @@ const MarketCard = (props) => {
 
       </div>
       <div className="market-details">
-        <h2>Name</h2>
-        <p>Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, ipsum vero! Repellat tempora aliquam libero sequi est eius explicabo odio repudiandae perferendis, consequuntur possimus fugit similique quae, nulla voluptates illo ratione harum optio molestiae, doloribus neque praesentium. Corrupti voluptatem asperiores incidunt fuga ab reiciendis veniam quis non quidem vitae. Deserunt aut iusto ea molestias provident distinctio vel. Voluptatem in doloremque vel tempora quos recusandae asperiores cupiditate iusto? Ad quos repellendus accusamus eius voluptate. Quasi minus doloremque animi excepturi voluptatem odit necessitatibus. Quo autem sapiente soluta, architecto dignissimos itaque ratione saepe delectus laboriosam, commodi tempore blanditiis quas quaerat asperiores eligendi eaque.</p>
-        <h2>Category</h2>
-        <h2>Address</h2>
+        <h1>{props.name}</h1>
+        <p>{props.description}</p>
+        <h2>
+          <img src={category} alt="" /> 
+          {props.category}
+        </h2>
+        <h2>
+          <img src={location} alt="" />
+          {props.address}
+        </h2>
       </div>
     </div>
   );

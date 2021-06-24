@@ -12,7 +12,7 @@ const Nav = (props) => {
       <form action="" className="search-container">
         <div className="top">
           <input type="text" placeholder="Find market " />
-          <button type="submit"><i class="fas fa-search"></i></button>
+          <button type="submit"><i className="fas fa-search"></i></button>
         </div>
         <div className="bottom">
           <div>name</div>

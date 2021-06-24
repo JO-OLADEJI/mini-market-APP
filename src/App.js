@@ -12,7 +12,7 @@ import add from './assets/add.png';
 
 
 function App() {
-  const [adminAuthToken, setAdminAuthToken] = useState(null);
+  // const [adminAuthToken, setAdminAuthToken] = useState(null);
   const [loginPage, setLoginPage] = useState(false);
   const [allMarkets, setAllMarkets] = useState(null);
 
@@ -20,8 +20,13 @@ function App() {
     setLoginPage(show);
   }
 
-  useEffect(async () => {
-    // get all data from the API
+  useEffect(() => {
+    setTimeout(async () => {
+      // get all data from the API | delay for skeleton screen
+      const raw = await fetch('http://localhost:3001/api/market');
+      const data = await raw.json();
+      setAllMarkets(data);
+    }, 3 * 1000);
   });
 
   return (
@@ -40,10 +45,16 @@ function App() {
       <div className="markets">
         {/* if market card exists */}
         {allMarkets && allMarkets.map(market => (
-          <MarketCard />
+          <MarketCard 
+            key={market._id}
+            name={market.name}
+            description={market.description}
+            category={market.foodCategory}
+            address={`${market.geolocation.lat}, ${market.geolocation.long}`}
+          />
         ))}
 
-        {/* if market details is not back */}
+        {/* if market details is not ready from API call */}
         {!allMarkets && [1, 2, 3, 4, 5].map(x => (
           <MarketCardSkeleton key={x} />
         ))}
