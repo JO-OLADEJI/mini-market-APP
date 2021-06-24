@@ -14,7 +14,7 @@ const Login = (props) => {
 
         <button type="submit">Login</button>
         <img 
-          className="form-close" 
+          className="login-close" 
           src={close} 
           alt="X"
           onClick={() => props.handleShowLogin(false)} 
