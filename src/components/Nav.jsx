@@ -17,7 +17,11 @@ const Nav = (props) => {
         <button>location</button>
       </div>
       <div className="nav-buttons">
-        <img src={lock} alt="login" />
+        <img 
+          src={lock} 
+          alt="login"
+          onClick={() => props.handleShowLogin(true)} 
+        />
       </div>
     </div>
   );
