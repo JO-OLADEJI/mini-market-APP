@@ -43,6 +43,10 @@ function App() {
       const result = allMarkets.filter(market => market.name.toLowerCase().includes(searchParam.trim()));
       setMarketToDisplay(result);
     }
+    else if (searchCategory === 'category') {
+      const result = allMarkets.filter(market => market.foodCategory.toLowerCase().includes(searchParam.trim()));
+      setMarketToDisplay(result);
+    }
     console.log({ searchParam, searchCategory });
   }
 
@@ -81,7 +85,7 @@ function App() {
 
       <div className="markets">
         {/* if market details is not ready from API call */}
-        {!marketToDisplay && [1, 2, 3, 4, 5].map(x => (
+        {!allMarkets && [1, 2, 3, 4, 5].map(x => (
           <MarketCardSkeleton key={x} />
         ))}
 
