@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.skeleton {
+  background-color: #f5f5f5;
+}
+
+.skeleton .image {
+  height: 15rem;
+  width: 15rem;
+  background-color: #d8d8d8;
+  border-radius: 1rem;
+}
+
+.skeleton .text {
+  height: 1.5rem;
+  width: 100%;
+  background-color: #dddddd;
+  border-radius: .3rem;
+  margin: .7rem 0;
+}
+
+.skeleton .title {
+  height: 1.5rem;
+  width: 50%;
+  background-color: #cecdcd;
+  border-radius: .3rem;
+  margin: .7rem 0;
+}
+
+.skeleton .avatar {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background-color: #d8d8d8;
+}
+
+.skeleton-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: flex-start;
+}
+
+#MarketCardSkeleton {
+  padding: 1rem;
+  background-color: #f5f5f5;
+  margin: 2.5rem 0;
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.Schimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: lightup 1s infinite;
+}
+
+.lightning {
+  width: 50%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: skewX(-20deg);
+  box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes lightup {
+  0% { transform: translateX(-150%);}
+  50% { transform: translateX(60%);}
+  100% { transform: translateX(150%);}
+}

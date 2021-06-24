@@ -8,6 +8,7 @@
   font-family: 'Cabin Sketch', cursive;
   box-shadow: 0 5px 10px #979797c2;
   background-color: #008737;
+  margin-bottom: 5rem;
 }
 
 .logo {
@@ -60,4 +61,73 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.nav-buttons img {
+  width: 1rem;
+}
+
+
+
+
+
+/* markets */
+.markets {
+  padding: 0 10vw;
+}
+
+#MarketCard {
+  margin: 2.5rem 0;
+  border: 2px solid black;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.images-container {
+  width: 120rem;
+  height: 15rem;
+  border-radius: 1rem;
+  background-color: #F5FAF5;
+  /* border: 1px solid red; */
+  margin-right: 1rem;
+}
+
+
+
+
+
+
+/* footer */
+#Footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #008737;
+  padding-top: 3rem;
+  margin-top: 5rem;
+}
+
+.footer-logo img {
+  display: block;
+  margin: auto;
+  width: 3rem;
+}
+
+.footer-logo {
+  font-family: 'Cabin Sketch', cursive;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.copyright {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .7rem;
+  padding: .5rem;
+  border-top: 1px solid black;
+  font-weight: bold;
 }
