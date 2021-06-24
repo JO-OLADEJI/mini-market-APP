@@ -9,15 +9,45 @@ import MarketCardSkeleton from './skeletons/MarketCardSkeleton';
 import eyes from './assets/eyes.png';
 import cart from './assets/cart.png';
 import add from './assets/add.png';
+import MarketForm from './components/MarketForm.jsx';
 
 
 function App() {
-  // const [adminAuthToken, setAdminAuthToken] = useState(null);
+  // state
+  const [authToken, setAuthToken] = useState(null);
   const [loginPage, setLoginPage] = useState(false);
   const [allMarkets, setAllMarkets] = useState(null);
+  const [marketToDisplay, setMarketToDisplay] = useState(null);
+  const [displayForm, setDisplayForm] = useState(false);
+  const [searchParam, setSearchParam] = useState('');
+  const [searchCategory, setSearchCategory] = useState('name');
 
+
+
+  // functions [event handlers]
   const handleShowLogin = (show) => {
     setLoginPage(show);
+  }
+
+  const handleShowForm = (show) => {
+    setDisplayForm(show);
+  }
+
+  const handleSearchChange = (e) => {
+    setSearchParam(e.target.value);
+  }
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchCategory === 'name') {
+      const result = allMarkets.filter(market => market.name.toLowerCase().includes(searchParam.trim()));
+      setMarketToDisplay(result);
+    }
+    console.log({ searchParam, searchCategory });
+  }
+
+  const handleSearchCategory = (x) => {
+    setSearchCategory(x);
   }
 
   useEffect(() => {
@@ -26,37 +56,44 @@ function App() {
       const raw = await fetch('http://localhost:3001/api/market');
       const data = await raw.json();
       setAllMarkets(data);
+      setMarketToDisplay(data);
     }, 3 * 1000);
-  });
+  }, []);
+
+
 
   return (
     <div className="App">
       <Nav 
        handleShowLogin={handleShowLogin}
+       handleSearchChange={handleSearchChange}
+       handleSearchSubmit={handleSearchSubmit}
+       searchCategory={searchCategory}
+       handleSearchCategory={handleSearchCategory}
       />
 
       <div className="intro-text">
         <h1>Welcome,
           <br />
-          L<img src={eyes} />king for a place to <img src={cart} /> ??
+          L<img src={eyes} alt="" />king for a place to <img src={cart} alt="" /> ??
         </h1>
       </div>
 
       <div className="markets">
+        {/* if market details is not ready from API call */}
+        {!marketToDisplay && [1, 2, 3, 4, 5].map(x => (
+          <MarketCardSkeleton key={x} />
+        ))}
+
         {/* if market card exists */}
-        {allMarkets && allMarkets.map(market => (
-          <MarketCard 
+        {marketToDisplay && marketToDisplay.map(market => (
+          <MarketCard
             key={market._id}
             name={market.name}
             description={market.description}
             category={market.foodCategory}
             address={`${market.geolocation.lat}, ${market.geolocation.long}`}
           />
-        ))}
-
-        {/* if market details is not ready from API call */}
-        {!allMarkets && [1, 2, 3, 4, 5].map(x => (
-          <MarketCardSkeleton key={x} />
         ))}
       </div>
 
@@ -67,7 +104,14 @@ function App() {
         handleShowLogin={handleShowLogin}
       />
 
-      <div className="add-market-btn">
+      <MarketForm
+        displayForm={displayForm}
+        handleShowForm={handleShowForm}
+      />
+
+      <div 
+        className="add-market-btn"
+        onClick={() => handleShowForm(true)}>
         <img src={add} alt="+" />
       </div>
     </div>

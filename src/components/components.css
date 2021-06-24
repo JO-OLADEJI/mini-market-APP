@@ -54,6 +54,7 @@
   cursor: pointer;
   color: #F5FAF5;
   font-size: .7rem;
+  /* box-shadow: 0 0 10px #008736e8; */
 }
 
 .search-container input {
@@ -75,7 +76,7 @@
 }
 
 .search-container input::placeholder {
-  color: #008737;
+  color: gray;
 }
 
 .search-container button {
@@ -88,6 +89,11 @@
   cursor: pointer;
   color: #F5FAF5;
   font-size: .9rem;
+  transition: background-color .3s ease-in;
+}
+
+.search-container button:hover {
+  background-color: #808080;
 }
 
 .nav-buttons {
@@ -146,7 +152,7 @@
 }
 
 .images-container img:nth-child(1) {
-  animation: fade1 9s infinite linear;
+  animation: fade1 12s infinite linear;
 }
 @keyframes fade1 {
   0% { opacity: 0.5; }
@@ -158,7 +164,7 @@
 }
 
 .images-container img:nth-child(2) {
-  animation: fade2 9s infinite linear;
+  animation: fade2 12s infinite linear;
 }
 @keyframes fade2 {
   0% { opacity: 0; }
@@ -170,7 +176,7 @@
 }
 
 .images-container img:nth-child(3) {
-  animation: fade3 9s infinite linear;
+  animation: fade3 12s infinite linear;
 }
 @keyframes fade3 {
   0% { opacity: 0.5; }
@@ -272,6 +278,7 @@
   margin-bottom: 2rem;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 1.5rem;
+  color: white;
 }
 
 #Login form {
@@ -299,7 +306,8 @@
 
 #Login input:focus {
   outline: none;
-  border: 2px solid gray;
+  border: 2px solid #b6b6b6;
+  background-color: #b6b6b6;
 }
 
 #Login input::placeholder {
@@ -320,10 +328,124 @@
   font-weight: bold;
 }
 
-#Login .form-close {
+#Login .login-close {
   position: absolute;
   top: 7%;
   right: 7%;
   width: 1.2rem;
   cursor: pointer;
+}
+
+
+
+
+/* Market Form */
+#MarketForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff3d;
+  backdrop-filter: blur(5px);
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+#MarketForm .form-close {
+  position: absolute;
+  top: 4%;
+  right: 6%;
+  width: 1.2rem;
+  cursor: pointer;
+}
+
+#MarketForm h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.5rem;
+  color: white
+}
+
+#MarketForm form {
+  width: 30rem;
+  background-color: #008737;
+  border: 1px solid #008737;
+  padding: 2rem;
+  border-radius: 1rem;
+  position: relative;
+}
+
+#MarketForm input {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  padding: .7rem 1.5rem;
+  border: 2px solid #ffffff;
+  color: #008737;
+  font-weight: bold;
+  font-size: .8rem;
+  border-radius: 5rem;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.double {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#MarketForm .double input {
+  width: 49%;
+}
+
+#MarketForm .image-fields input {
+  width: 70%;
+  padding: .3rem 1.5rem;
+  font-weight: normal;
+}
+
+#MarketForm .image-fields input:nth-child(2) {
+  margin-left: auto;
+}
+
+#MarketForm input:focus,
+#MarketForm textarea:focus {
+  outline: none;
+  border: 2px solid #b6b6b6;
+  background-color: #b6b6b6;
+}
+
+#MarketForm textarea {
+  display: block;
+  width: 100%;
+  height: 8rem;
+  background-color: #ffffff;
+  padding: .7rem 1.5rem;
+  border: 2px solid #ffffff;
+  color: #008737;
+  font-weight: bold;
+  font-size: .8rem;
+  border-radius: .5rem;
+  font-family: 'Josefin Sans', sans-serif;
+  resize: none;
+  margin-bottom: 3rem;
+}
+
+#MarketForm button {
+  display: block;
+  margin: auto;
+  background-color: #ffffff;
+  color: #008737;
+  font-family: 'Josefin Sans', sans-serif;
+  padding: .8rem 2.5rem;
+  border-radius: 5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
 }

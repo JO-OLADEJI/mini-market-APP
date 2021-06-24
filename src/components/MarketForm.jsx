@@ -9,15 +9,16 @@ const MarketForm = (props) => {
     <div id="MarketForm" style={{display: pageStyle}}>
       <form action="">
         <h1>Market</h1>
-        <input type="text" placeholder="Name" />
-        <input type="text" placeholder="Category" />
+        <div className="double">
+          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Category" />
+        </div>
         <input type="text" placeholder="Address" />
-        <fieldset>
-          <legend>Images</legend>
-          <input type="text" placeholder="Image 1" />
-          <input type="text" placeholder="Image 2" />
-          <input type="text" placeholder="Image 3" />
-        </fieldset>
+        <div className="image-fields">
+          <input type="text" placeholder="Image URL 1" />
+          <input type="text" placeholder="Image URL 2" />
+          <input type="text" placeholder="Image URL 3" />
+        </div>
         <textarea type="text" placeholder="description" />
 
         <button type="submit">Save</button>
