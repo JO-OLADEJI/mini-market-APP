@@ -7,3 +7,10 @@
 .App {
   overflow: hidden;
 }
+
+.intro-text {
+  padding: 0 10vw;
+  color: #008737;
+  font-family: 'Josefin Sans', sans-serif;
+  margin-bottom: 5rem;
+}

@@ -6,6 +6,8 @@ import Login from './components/Login.jsx';
 import MarketCard from './components/MarketCard.jsx';
 import Nav from './components/Nav.jsx';
 import MarketCardSkeleton from './skeletons/MarketCardSkeleton';
+import eyes from './assets/eyes.png';
+import cart from './assets/cart.png';
 
 
 function App() {
@@ -22,7 +24,10 @@ function App() {
        handleShowLogin={handleShowLogin}
       />
       <div className="intro-text">
-        <h1>Welcome to Market Bank</h1>
+        <h1>Welcome,
+          <br />
+          L<img src={eyes} />king for a place to <img src={cart} /> ??
+        </h1>
       </div>
       <div className="markets">
 

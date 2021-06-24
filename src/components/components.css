@@ -7,7 +7,7 @@
   align-items: center;
   font-family: 'Cabin Sketch', cursive;
   box-shadow: 0 5px 10px #979797c2;
-  background-color: #008737;
+  background-color: #ffffff;
   margin-bottom: 5rem;
 }
 
@@ -16,7 +16,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 30%;
-  color: #ffffff;
+  color: #008737;
   font-weight: bold;
 }
 
@@ -33,27 +33,29 @@
 
 .search-container input {
   margin-right: .5rem;
-  border: 2px solid #ffffff;
+  border: 2px solid #008737;
   padding: .5rem 1.5rem;
-  background-color: #008737;
+  background-color: #ffffff;
   border-radius: .5rem;
   width: 20rem;
   font-family: 'Josefin Sans', sans-serif;
-  color: #ffffff;
+  color: #008737;
+  font-weight: bold;
 }
 
 .search-container input::placeholder {
-  color: #ffffff;
+  color: #008737;
 }
 
 .search-container button {
-  background-color: #F5FAF5;
+  background-color: #008737;
   border: none;
   padding: .2rem .5rem;
   margin-right: .2rem;
   font-family: 'Josefin Sans', sans-serif;
   border-radius: .2rem;
   cursor: pointer;
+  color: #F5FAF5;
 }
 
 .nav-buttons {
