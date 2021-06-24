@@ -123,13 +123,62 @@
   overflow: hidden;
 }
 
-.images-container {
+.images {
   grid-column: 1 / 2;
   width: 15rem;
   height: 15rem;
   border-radius: 1rem;
   background-color: #d8d8d8;
   margin-right: 1rem;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.images-container {
+  position: relative;
+}
+
+.images-container img {
+  position: absolute;
+  top: 0;
+  left: -20%;
+  height: 17rem;
+}
+
+.images-container img:nth-child(1) {
+  animation: fade1 9s infinite linear;
+}
+@keyframes fade1 {
+  0% { opacity: 0.5; }
+  7.5% { opacity: 1; }
+  25.5% { opacity: 1; }
+  40.5% { opacity: 0; }
+  92.5% { opacity: 0; }
+  100% { opacity: 0.5; }
+}
+
+.images-container img:nth-child(2) {
+  animation: fade2 9s infinite linear;
+}
+@keyframes fade2 {
+  0% { opacity: 0; }
+  25.5% {opacity: 0;}
+  40.5% { opacity: 1; }
+  58.5% { opacity: 1;}
+  73.5% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.images-container img:nth-child(3) {
+  animation: fade3 9s infinite linear;
+}
+@keyframes fade3 {
+  0% { opacity: 0.5; }
+  7.5% { opacity: 0; }
+  58.5% {opacity: 0; }
+  73.5% { opacity: 1; }
+  92.5% { opacity: 1; }
+  100% { opacity: 0.5; }
 }
 
 .market-details {
