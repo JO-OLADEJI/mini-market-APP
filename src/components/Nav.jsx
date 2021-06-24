@@ -3,17 +3,6 @@ import logo from '../assets/logo.svg';
 
 
 const Nav = (props) => {
-  const [searchParam, setSearchParam] = useState('');
-  const [searchCategory, setSearchCategory] = useState('name');
-
-  // const handleSearchChange = (e) => {
-  //   setSearchParam(e.target.value);
-  // }
-
-  // const handleSearchSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log({ searchParam, searchCategory });
-  // }
 
   return (
     <div id="Nav">

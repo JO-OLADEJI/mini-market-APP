@@ -25,6 +25,17 @@ function App() {
 
 
   // functions [event handlers]
+  useEffect(() => {
+    setTimeout(async () => {
+      // get all data from the API | delay for skeleton screen
+      const raw = await fetch('http://localhost:3001/api/market');
+      const data = await raw.json();
+      setAllMarkets(data);
+      setMarketToDisplay(data);
+    }, 3 * 1000);
+  }, []);
+
+
   const handleShowLogin = (show) => {
     setLoginPage(show);
   }
@@ -37,43 +48,60 @@ function App() {
     setSearchParam(e.target.value);
   }
 
+  const handleSearchCategory = (x) => {
+    setSearchCategory(x);
+  }
+
+  function getDistance(x1, y1, x2, y2){
+    let y = x2 - x1;
+    let x = y2 - y1;
+
+    return Math.sqrt((x * x) + (y * y));
+  }
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchCategory === 'name') {
       const result = allMarkets.filter(market => market.name.toLowerCase().includes(searchParam.trim()));
       setMarketToDisplay(result);
     }
+
     else if (searchCategory === 'category') {
       const result = allMarkets.filter(market => market.foodCategory.toLowerCase().includes(searchParam.trim()));
       setMarketToDisplay(result);
     }
+
+    else if (searchCategory === 'location') {
+      setSearchParam('');
+      navigator.geolocation.getCurrentPosition(
+        (result) => {
+          const {latitude, longitude} = result.coords
+
+          // sort based on the nearest location
+          let duplicate = allMarkets;
+          duplicate.forEach(market => market.distance = getDistance(latitude, longitude, market.geolocation.lat, market.geolocation.long));
+          duplicate.sort((a, b) => a.distance - b.distance);
+          setMarketToDisplay(null);
+          setMarketToDisplay(duplicate);
+
+        },
+        (error) => console.log(error)
+      );
+    }
     console.log({ searchParam, searchCategory });
   }
-
-  const handleSearchCategory = (x) => {
-    setSearchCategory(x);
-  }
-
-  useEffect(() => {
-    setTimeout(async () => {
-      // get all data from the API | delay for skeleton screen
-      const raw = await fetch('http://localhost:3001/api/market');
-      const data = await raw.json();
-      setAllMarkets(data);
-      setMarketToDisplay(data);
-    }, 3 * 1000);
-  }, []);
 
 
 
   return (
     <div className="App">
       <Nav 
-       handleShowLogin={handleShowLogin}
-       handleSearchChange={handleSearchChange}
-       handleSearchSubmit={handleSearchSubmit}
-       searchCategory={searchCategory}
-       handleSearchCategory={handleSearchCategory}
+        searchParam={searchParam}
+        handleShowLogin={handleShowLogin}
+        handleSearchChange={handleSearchChange}
+        handleSearchSubmit={handleSearchSubmit}
+        searchCategory={searchCategory}
+        handleSearchCategory={handleSearchCategory}
       />
 
       <div className="intro-text">
