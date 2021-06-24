@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '../assets/logo.svg';
-import lock from '../assets/lock.svg';
 
 
 const Nav = (props) => {
@@ -10,17 +9,21 @@ const Nav = (props) => {
         <img src={logo} alt="" />
         <h1>Market Bank</h1>
       </div>
-      <div className="search-container">
-        <input type="text" placeholder="Find market " />
-        <button>name</button>
-        <button>category</button>
-        <button>location</button>
-      </div>
+      <form action="" className="search-container">
+        <div className="top">
+          <input type="text" placeholder="Find market " />
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+        <div className="bottom">
+          <div>name</div>
+          <div>category</div>
+          <div>location</div>
+        </div>
+      </form>
       <div className="nav-buttons">
-        <img 
-          src={lock} 
-          alt="login"
-          onClick={() => props.handleShowLogin(true)} 
+        <i 
+          className="fas fa-sign-in-alt"
+          onClick={() => props.handleShowLogin(true)}
         />
       </div>
     </div>

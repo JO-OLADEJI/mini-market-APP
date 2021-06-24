@@ -1,11 +1,10 @@
 #Nav {
   min-height: 10vh;
   width: 100vw;
-  padding: 1rem 10vw;
+  padding: 1.5rem 10vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Cabin Sketch', cursive;
   box-shadow: 0 5px 10px #979797c2;
   background-color: #ffffff;
   margin-bottom: 5rem;
@@ -20,19 +19,46 @@
   font-weight: bold;
 }
 
+.logo h1 {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  color: black;
+}
+
 .logo img {
-  margin-right: .5rem;
+  margin-right: 1rem;
+  width: 2.5rem;
 }
 
 .search-container {
   width: 40%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.search-container .bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-container .bottom div {
+  background-color: #00873681;
+  border: none;
+  padding: .2rem .5rem;
+  margin-right: .2rem;
+  font-family: 'Josefin Sans', sans-serif;
+  border-radius: .2rem;
+  cursor: pointer;
+  color: #F5FAF5;
+  font-size: .7rem;
+}
+
 .search-container input {
   margin-right: .5rem;
+  margin-bottom: .5rem;
   border: 2px solid #008737;
   padding: .5rem 1.5rem;
   background-color: #ffffff;
@@ -50,12 +76,13 @@
 .search-container button {
   background-color: #008737;
   border: none;
-  padding: .2rem .5rem;
+  padding: .5rem 1rem;
   margin-right: .2rem;
   font-family: 'Josefin Sans', sans-serif;
-  border-radius: .2rem;
+  border-radius: 1rem;
   cursor: pointer;
   color: #F5FAF5;
+  font-size: .9rem;
 }
 
 .nav-buttons {
@@ -65,8 +92,10 @@
   align-items: center;
 }
 
-.nav-buttons img {
-  width: 1rem;
+.nav-buttons i {
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: #008737;
 }
 
 
@@ -121,9 +150,9 @@
 }
 
 .footer-logo {
-  font-family: 'Cabin Sketch', cursive;
+  font-family: 'Dancing Script', cursive;
   margin-bottom: 2rem;
-  color: #ffffff;
+  color: black;
 }
 
 .copyright {
