@@ -15,11 +15,12 @@ import EditForm from './components/EditForm';
 
 function App() {
   // state
+  const emptymarket = { 'name': '', 'category': '', 'foodCategory': '', 'description': '', 'geolocation': { 'lat': 0, 'long': 0 } };
   const [authToken, setAuthToken] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginPage, setLoginPage] = useState(false);
   const [allMarkets, setAllMarkets] = useState(null);
-  const [editDetails, setEditDetails] = useState(null);
+  const [editDetails, setEditDetails] = useState(emptymarket);
   const [marketToDisplay, setMarketToDisplay] = useState(null);
   const [displayForm, setDisplayForm] = useState(false);
   const [displayEdit, setDisplayEdit] = useState(false);
@@ -112,10 +113,10 @@ function App() {
   }
 
   const handleEdit = (id) => {
-    const request = allMarkets.filter(market => market._id = id)[0];
-    setEditDetails(request);
+    const request = allMarkets.filter(market => market._id === id);
+    setEditDetails(request[0]);
     setDisplayEdit(true);
-    // console.log(id);
+    // console.log(request[0]);
   }
 
   const handleSearchSubmit = (e) => {
@@ -192,7 +193,7 @@ function App() {
             handleDelete={handleDelete}
             description={market.description}
             category={market.foodCategory}
-            address={`${market.geolocation.lat}, ${market.geolocation.long}`}
+            geolocation={market.geolocation}
           />
         ))}
       </div>

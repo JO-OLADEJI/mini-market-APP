@@ -427,8 +427,13 @@
 
 #MarketForm .image-fields input {
   width: 70%;
+  margin-bottom: .5rem;
   padding: .3rem 1.5rem;
   font-weight: normal;
+}
+
+#MarketForm .images-fields input:nth-child(3) {
+  margin-bottom: 1rem;
 }
 
 #MarketForm .image-fields input:nth-child(2) {

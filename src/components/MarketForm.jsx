@@ -9,7 +9,7 @@ const MarketForm = (props) => {
   return (
     <div id="MarketForm" style={{display: pageStyle}}>
       <form action="">
-        <h1>Market</h1>
+        <h1>Create Market</h1>
         <div className="double">
           <input type="text" placeholder="Name" />
           <input type="text" placeholder="Category" />

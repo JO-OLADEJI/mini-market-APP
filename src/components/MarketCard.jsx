@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import category from '../assets/category.png';
 import location from '../assets/location.png';
 
 
 const MarketCard = (props) => {
   const buttonStyle = props.loggedIn ? 'block' : 'none';
+  const [address, setAddress] = useState('');
+  const API_KEY = 'AIzaSyB9fPxImS5O61BRAAIK5_fjtwBRHPucAWQ';
+  const GEOCODE_API = '';
+  const REVERSE_GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${props.geolocation.lat},${props.geolocation.long}&key=${API_KEY}`;
+
+
+  const formatAddress = async (locationObj) => {
+    const raw = await fetch(REVERSE_GEOCODE_API);
+    const response = await raw.json();
+    const address = response.results[0].formatted_address;
+    setAddress(address);
+  }
+  formatAddress(props.geolocation);
 
 
   return (
@@ -29,7 +42,7 @@ const MarketCard = (props) => {
         </h2>
         <h2>
           <img src={location} alt="" />
-          {props.address}
+          {address}
         </h2>
       </div>
       <div className="admin-btns" style={{display: buttonStyle}}>
