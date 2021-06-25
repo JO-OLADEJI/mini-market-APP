@@ -25,6 +25,7 @@ function App() {
   const [displayForm, setDisplayForm] = useState(false);
   const [displayEdit, setDisplayEdit] = useState(false);
   const [searchParam, setSearchParam] = useState('');
+  const [refresh, setRefresh] = useState(false);
   const [searchCategory, setSearchCategory] = useState('name');
   const createBtnStyle = loggedIn ? 'flex' : 'none';
   const API = 'http://localhost:3001';
@@ -42,7 +43,7 @@ function App() {
       setAllMarkets(data);
       setMarketToDisplay(data);
     }, 3 * 1000);
-  }, []);
+  }, [refresh]);
 
   const handleShowLogin = (show) => {
     setLoginPage(show);
@@ -110,6 +111,24 @@ function App() {
     const modified = duplicate.filter(market => market._id !== id);
     setMarketToDisplay(null);
     setMarketToDisplay(modified);
+  }
+
+  const handleCreate = async (e, body) => {
+    e.preventDefault();
+    const details = await body;
+    const raw = await fetch(`${API}/api/market`, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': authToken
+      },
+      body: JSON.stringify(details)
+    });
+    const response = await raw.json();
+    setRefresh(!refresh);
+    // console.log(response);
   }
 
   const handleEdit = (id) => {
@@ -215,6 +234,7 @@ function App() {
       <MarketForm
         displayForm={displayForm}
         handleShowForm={handleShowForm}
+        handleCreate={handleCreate}
       />
 
       <div 

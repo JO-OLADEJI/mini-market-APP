@@ -24,18 +24,18 @@ const EditForm = (props) => {
           <input 
             type="text" 
             placeholder="Name" 
-            value={props.editDetails.name}
+            // value={props.editDetails.name}
           />
           <input 
             type="text" 
             placeholder="Category" 
-            value={props.editDetails.foodCategory}
+            // value={props.editDetails.foodCategory}
           />
         </div>
         <input 
           type="text" 
           placeholder="Address" 
-          value={address}
+          // value={address}
         />
         <div className="image-fields">
           <input 
@@ -57,7 +57,7 @@ const EditForm = (props) => {
         <textarea 
           type="text" 
           placeholder="description" 
-          value={props.editDetails.description}
+          // value={props.editDetails.description}
         />
 
         <button type="submit">Save</button>
