@@ -33,7 +33,10 @@ const MarketCard = (props) => {
         </h2>
       </div>
       <div className="admin-btns" style={{display: buttonStyle}}>
-      <i className="fas fa-pencil-alt" />
+      <i 
+        className="fas fa-pencil-alt"
+        onDoubleClick={() => props.handleEdit(props.id)}
+      />
       <i 
         className="fas fa-trash" 
         onDoubleClick={async () => props.handleDelete(props.id)} 

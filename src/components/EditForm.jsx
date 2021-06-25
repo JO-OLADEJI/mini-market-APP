@@ -2,14 +2,14 @@ import React from 'react';
 import close from '../assets/close.png';
 
 
-const MarketForm = (props) => {
-  const pageStyle = props.displayForm ? 'flex' : 'none';
+const EditForm = (props) => {
+  const pageStyle = props.displayEdit ? 'flex' : 'none';
 
 
   return (
     <div id="MarketForm" style={{display: pageStyle}}>
       <form action="">
-        <h1>Market</h1>
+        <h1>Edit Market</h1>
         <div className="double">
           <input type="text" placeholder="Name" />
           <input type="text" placeholder="Category" />
@@ -27,11 +27,11 @@ const MarketForm = (props) => {
           className="form-close" 
           src={close}
           alt="X"
-          onClick={() => props.handleShowForm(false)} 
+          onClick={() => props.handleShowEdit(false)} 
         />
       </form>
     </div>
   );
 }
  
-export default MarketForm;
+export default EditForm;

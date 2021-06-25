@@ -10,6 +10,7 @@ import eyes from './assets/eyes.png';
 import cart from './assets/cart.png';
 import add from './assets/add.png';
 import MarketForm from './components/MarketForm.jsx';
+import EditForm from './components/EditForm';
 
 
 function App() {
@@ -18,12 +19,16 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginPage, setLoginPage] = useState(false);
   const [allMarkets, setAllMarkets] = useState(null);
+  const [editDetails, setEditDetails] = useState(null);
   const [marketToDisplay, setMarketToDisplay] = useState(null);
   const [displayForm, setDisplayForm] = useState(false);
+  const [displayEdit, setDisplayEdit] = useState(false);
   const [searchParam, setSearchParam] = useState('');
   const [searchCategory, setSearchCategory] = useState('name');
-  const API = 'http://localhost:3001';
   const createBtnStyle = loggedIn ? 'flex' : 'none';
+  const API = 'http://localhost:3001';
+
+
 
 
 
@@ -38,13 +43,16 @@ function App() {
     }, 3 * 1000);
   }, []);
 
-
   const handleShowLogin = (show) => {
     setLoginPage(show);
   }
 
   const handleShowForm = (show) => {
     setDisplayForm(show);
+  }
+
+  const handleShowEdit = (show) => {
+    setDisplayEdit(show);
   }
 
   const handleSearchChange = (e) => {
@@ -55,6 +63,18 @@ function App() {
     setSearchCategory(x);
   }
 
+  function getDistance(x1, y1, x2, y2){
+    let y = x2 - x1;
+    let x = y2 - y1;
+
+    return Math.sqrt((x * x) + (y * y));
+  }
+
+
+
+
+
+  // bigger event handlers
   const handleLogin = async (e, email, password) => {
     e.preventDefault();
     const raw = await fetch(`${API}/api/admin/login`, {
@@ -91,11 +111,11 @@ function App() {
     setMarketToDisplay(modified);
   }
 
-  function getDistance(x1, y1, x2, y2){
-    let y = x2 - x1;
-    let x = y2 - y1;
-
-    return Math.sqrt((x * x) + (y * y));
+  const handleEdit = (id) => {
+    const request = allMarkets.filter(market => market._id = id)[0];
+    setEditDetails(request);
+    setDisplayEdit(true);
+    // console.log(id);
   }
 
   const handleSearchSubmit = (e) => {
@@ -132,6 +152,11 @@ function App() {
 
 
 
+
+
+
+
+
   return (
     <div className="App">
       <Nav 
@@ -163,6 +188,7 @@ function App() {
             id={market._id}
             name={market.name}
             loggedIn={loggedIn}
+            handleEdit={handleEdit}
             handleDelete={handleDelete}
             description={market.description}
             category={market.foodCategory}
@@ -177,6 +203,12 @@ function App() {
         loginPage={loginPage}
         handleLogin={handleLogin}
         handleShowLogin={handleShowLogin}
+      />
+
+      <EditForm 
+        displayEdit={displayEdit}
+        editDetails={editDetails}
+        handleShowEdit={handleShowEdit}
       />
 
       <MarketForm
