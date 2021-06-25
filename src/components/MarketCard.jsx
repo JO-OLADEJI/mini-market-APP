@@ -4,6 +4,9 @@ import location from '../assets/location.png';
 
 
 const MarketCard = (props) => {
+  const buttonStyle = props.loggedIn ? 'block' : 'none';
+
+
   return (
     <div id="MarketCard">
       <div className="images">
@@ -28,6 +31,10 @@ const MarketCard = (props) => {
           <img src={location} alt="" />
           {props.address}
         </h2>
+      </div>
+      <div className="admin-btns" style={{display: buttonStyle}}>
+      <i className="fas fa-pencil-alt" />
+      <i className="fas fa-trash" />
       </div>
     </div>
   );

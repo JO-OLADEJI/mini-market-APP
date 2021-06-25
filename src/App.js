@@ -15,12 +15,15 @@ import MarketForm from './components/MarketForm.jsx';
 function App() {
   // state
   const [authToken, setAuthToken] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [loginPage, setLoginPage] = useState(false);
   const [allMarkets, setAllMarkets] = useState(null);
   const [marketToDisplay, setMarketToDisplay] = useState(null);
   const [displayForm, setDisplayForm] = useState(false);
   const [searchParam, setSearchParam] = useState('');
   const [searchCategory, setSearchCategory] = useState('name');
+  const API = 'http://localhost:3001';
+  const createBtnStyle = loggedIn ? 'flex' : 'none';
 
 
 
@@ -28,7 +31,7 @@ function App() {
   useEffect(() => {
     setTimeout(async () => {
       // get all data from the API | delay for skeleton screen
-      const raw = await fetch('http://localhost:3001/api/market');
+      const raw = await fetch(`${API}/api/market`);
       const data = await raw.json();
       setAllMarkets(data);
       setMarketToDisplay(data);
@@ -50,6 +53,25 @@ function App() {
 
   const handleSearchCategory = (x) => {
     setSearchCategory(x);
+  }
+
+  const handleLogin = async (e, email, password) => {
+    e.preventDefault();
+    const raw = await fetch(`${API}/api/admin/login`, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
+    const response = await raw.json();
+    setLoggedIn(response.login);
+    setAuthToken(response.token);
+    
+    
+    console.log(response);
   }
 
   function getDistance(x1, y1, x2, y2){
@@ -122,6 +144,7 @@ function App() {
           <MarketCard
             key={market._id}
             name={market.name}
+            loggedIn={loggedIn}
             description={market.description}
             category={market.foodCategory}
             address={`${market.geolocation.lat}, ${market.geolocation.long}`}
@@ -133,6 +156,7 @@ function App() {
 
       <Login
         loginPage={loginPage}
+        handleLogin={handleLogin}
         handleShowLogin={handleShowLogin}
       />
 
@@ -143,6 +167,7 @@ function App() {
 
       <div 
         className="add-market-btn"
+        style={{display: createBtnStyle}}
         onClick={() => handleShowForm(true)}>
         <img src={add} alt="+" />
       </div>
