@@ -69,9 +69,26 @@ function App() {
     const response = await raw.json();
     setLoggedIn(response.login);
     setAuthToken(response.token);
-    
-    
-    console.log(response);
+    // console.log(response);
+  }
+
+  const handleDelete = async (id) => {
+    const raw = await fetch(`${API}/api/market/${id}`, {
+      method: 'DELETE',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': authToken
+      }
+    });
+    const response = await raw.json();
+
+    // remove the deleted element from the page
+    let duplicate = marketToDisplay;
+    const modified = duplicate.filter(market => market._id !== id);
+    setMarketToDisplay(null);
+    setMarketToDisplay(modified);
   }
 
   function getDistance(x1, y1, x2, y2){
@@ -143,8 +160,10 @@ function App() {
         {marketToDisplay && marketToDisplay.map(market => (
           <MarketCard
             key={market._id}
+            id={market._id}
             name={market.name}
             loggedIn={loggedIn}
+            handleDelete={handleDelete}
             description={market.description}
             category={market.foodCategory}
             address={`${market.geolocation.lat}, ${market.geolocation.long}`}
