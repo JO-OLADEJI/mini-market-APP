@@ -7,7 +7,7 @@ const MarketCard = (props) => {
   const buttonStyle = props.loggedIn ? 'block' : 'none';
   const [address, setAddress] = useState('');
   const API_KEY = 'AIzaSyB9fPxImS5O61BRAAIK5_fjtwBRHPucAWQ';
-  const GEOCODE_API = '';
+  // const GEOCODE_API = '';
   const REVERSE_GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${props.geolocation.lat},${props.geolocation.long}&key=${API_KEY}`;
 
 

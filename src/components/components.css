@@ -302,6 +302,13 @@
   color: white;
 }
 
+#Login p {
+  color: white;
+  padding-left: .5rem;
+  font-size: .9rem;
+  height: 1rem;
+}
+
 #Login form {
   width: 20rem;
   background-color: #008737;
@@ -323,6 +330,7 @@
   font-size: .8rem;
   border-radius: 5rem;
   font-family: 'Josefin Sans', sans-serif;
+  transition: all .3s ease-in;
 }
 
 #Login input:focus {
@@ -342,11 +350,23 @@
   background-color: #ffffff;
   color: #008737;
   font-family: 'Josefin Sans', sans-serif;
-  padding: .8rem 2.5rem;
+  padding: .7rem 2.5rem;
   border-radius: 5rem;
-  border: none;
+  border: 2px solid #ffffff;
   cursor: pointer;
   font-weight: bold;
+  transition: all .3s ease-in;
+}
+
+#Login button:hover {
+  background-color: #008737;
+  color: #ffffff;
+}
+
+#Login button:focus {
+  background-color: #008737;
+  color: #ffffff;
+  outline: none;
 }
 
 #Login .login-close {

@@ -32,10 +32,14 @@ const Login = (props) => {
           value={password}
           onChange={(e) => handlePassword(e)}
         />
-
+        <p>{props.loginWarning}</p>
         <button 
           type="submit" 
-          onClick={async (e) => props.handleLogin(e, email, password)}>
+          onClick={async (e) => {
+            props.handleLogin(e, email, password);
+            setEmail('');
+            setPassword('');
+          }}>
           Login
         </button>
         <img 

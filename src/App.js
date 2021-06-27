@@ -19,6 +19,7 @@ function App() {
   const [authToken, setAuthToken] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginPage, setLoginPage] = useState(false);
+  const [loginWarning, setLoginWarning] = useState('');
   const [allMarkets, setAllMarkets] = useState(null);
   const [editDetails, setEditDetails] = useState(emptymarket);
   const [marketToDisplay, setMarketToDisplay] = useState(null);
@@ -28,6 +29,7 @@ function App() {
   const [refresh, setRefresh] = useState(false);
   const [searchCategory, setSearchCategory] = useState('name');
   const createBtnStyle = loggedIn ? 'flex' : 'none';
+  // const API = 'https://market-data-bank.herokuapp.com';
   const API = 'http://localhost:3001';
 
 
@@ -79,18 +81,32 @@ function App() {
   // bigger event handlers
   const handleLogin = async (e, email, password) => {
     e.preventDefault();
-    const raw = await fetch(`${API}/api/admin/login`, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    });
-    const response = await raw.json();
-    setLoggedIn(response.login);
-    setAuthToken(response.token);
+    setLoginWarning('Loading . . . . .');
+    try {
+      const raw = await fetch(`${API}/api/admin/login`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+      const response = await raw.json();
+      
+      if (response.login) {
+        setLoginWarning('');
+        setLoggedIn(response.login);
+        setAuthToken(response.token);
+        setLoginPage(false);
+      }
+      else {
+        setLoginWarning('Invalid email or password !');
+      }
+    }
+    catch(error) {
+      setLoginWarning('*An error occured !');
+    }
     // console.log(response);
   }
 
@@ -222,6 +238,7 @@ function App() {
       <Login
         loginPage={loginPage}
         handleLogin={handleLogin}
+        loginWarning={loginWarning}
         handleShowLogin={handleShowLogin}
       />
 
