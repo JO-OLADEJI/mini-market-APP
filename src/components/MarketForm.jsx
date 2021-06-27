@@ -120,7 +120,6 @@ const MarketForm = (props) => {
         <button 
           type="submit"
           onClick={async (e) => props.handleCreate(e, prepareBody())}
-          // onClick={async (e) => prepareBody(e)}>
           >
           Save
         </button>

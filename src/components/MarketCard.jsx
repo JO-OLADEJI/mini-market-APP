@@ -31,6 +31,7 @@ const MarketCard = (props) => {
           {/* <img src={props.images[0]} alt="" />
           <img src={props.images[1]} alt="" />
           <img src={props.images[2]} alt="" /> */}
+          <div className="shade"></div>
         </div>
       </div>
       <div className="market-details">
@@ -46,13 +47,14 @@ const MarketCard = (props) => {
         </h2>
       </div>
       <div className="admin-btns" style={{display: buttonStyle}}>
+      <p>double-click</p>
       <i 
         className="fas fa-pencil-alt"
         onDoubleClick={() => props.handleEdit(props.id)}
       />
       <i 
         className="fas fa-trash" 
-        onDoubleClick={async () => props.handleDelete(props.id)} 
+        onDoubleClick={async () => props.handleDelete(props.id)}
       />
       </div>
     </div>
