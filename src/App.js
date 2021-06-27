@@ -40,10 +40,17 @@ function App() {
   useEffect(() => {
     setTimeout(async () => {
       // get all data from the API | delay for skeleton screen
-      const raw = await fetch(`${API}/api/market`);
-      const data = await raw.json();
-      setAllMarkets(data);
-      setMarketToDisplay(data);
+      try {
+        const raw = await fetch(`${API}/api/market`);
+        const data = await raw.json();
+        setAllMarkets(data);
+        setMarketToDisplay(data);
+      }
+      catch(error) {
+        alert('An error occured while getting Markets from DB !');
+        setAllMarkets(0);
+        setMarketToDisplay(0);
+      }
     }, 3 * 1000);
   }, [refresh]);
 
@@ -107,51 +114,58 @@ function App() {
     catch(error) {
       setLoginWarning('*An error occured !');
     }
-    // console.log(response);
   }
 
   const handleDelete = async (id) => {
-    const raw = await fetch(`${API}/api/market/${id}`, {
-      method: 'DELETE',
-      mode: 'cors',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token': authToken
-      }
-    });
-    const response = await raw.json();
+    try {
+      const raw = await fetch(`${API}/api/market/${id}`, {
+        method: 'DELETE',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': authToken
+        }
+      });
+      const response = await raw.json();
 
-    // remove the deleted element from the page
-    let duplicate = marketToDisplay;
-    const modified = duplicate.filter(market => market._id !== id);
-    setMarketToDisplay(null);
-    setMarketToDisplay(modified);
+      // remove the deleted element from the page
+      let duplicate = marketToDisplay;
+      const modified = duplicate.filter(market => market._id !== id);
+      setMarketToDisplay(null);
+      setMarketToDisplay(modified);
+    }
+    catch(error) {
+      alert('An error occured while deleting Market !');
+    }
   }
 
   const handleCreate = async (e, body) => {
-    e.preventDefault();
-    const details = await body;
-    const raw = await fetch(`${API}/api/market`, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token': authToken
-      },
-      body: JSON.stringify(details)
-    });
-    const response = await raw.json();
-    setRefresh(!refresh);
-    // console.log(response);
+    try {
+      e.preventDefault();
+      const details = await body;
+      const raw = await fetch(`${API}/api/market`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': authToken
+        },
+        body: JSON.stringify(details)
+      });
+      const response = await raw.json();
+      setRefresh(!refresh);
+    }
+    catch(error) {
+      alert('An error occured while getting Markets from DB !');
+    }
   }
 
   const handleEdit = (id) => {
     const request = allMarkets.filter(market => market._id === id);
     setEditDetails(request[0]);
     setDisplayEdit(true);
-    // console.log(request[0]);
   }
 
   const handleSearchSubmit = (e) => {
@@ -180,7 +194,10 @@ function App() {
           setMarketToDisplay(duplicate);
 
         },
-        (error) => console.log(error)
+        (error) => {
+          console.log(error);
+          alert('Location Access Denied !!!');
+        }
       );
     }
     console.log({ searchParam, searchCategory });
@@ -223,6 +240,7 @@ function App() {
             key={market._id}
             id={market._id}
             name={market.name}
+            images={market.images}
             loggedIn={loggedIn}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
