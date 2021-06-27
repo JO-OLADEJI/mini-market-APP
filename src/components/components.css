@@ -189,8 +189,8 @@
 .images-container img {
   position: absolute;
   top: 0;
-  left: -20%;
-  height: 17rem;
+  left: 0;
+  height: 16rem;
 }
 
 .images-container img:nth-child(1) {

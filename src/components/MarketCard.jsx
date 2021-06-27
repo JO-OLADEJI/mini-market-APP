@@ -24,13 +24,9 @@ const MarketCard = (props) => {
     <div id="MarketCard">
       <div className="images">
         <div className="images-container">
-          <img src="https://weetracker.com/wp-content/uploads/2019/05/Computer-Village-phones.jpg" alt="" />
-          <img src="https://www.sunnewsonline.com/wp-content/uploads/2017/10/computer-village.jpg" alt="" />
-          <img src="https://techpoint.africa/wp-content/uploads/2017/05/computer-village-relocation-40-of-42.jpg" alt="" />
-
-          {/* <img src={props.images[0]} alt="" />
+          <img src={props.images[0]} alt="" />
           <img src={props.images[1]} alt="" />
-          <img src={props.images[2]} alt="" /> */}
+          <img src={props.images[2]} alt="" />
           <div className="shade"></div>
         </div>
       </div>
