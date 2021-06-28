@@ -14,7 +14,6 @@ const MarketForm = (props) => {
   const [warning, setWarning] = useState('');
   const API_KEY = 'AIzaSyB9fPxImS5O61BRAAIK5_fjtwBRHPucAWQ';
   const GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`;
-  // const REVERSE_GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${props.editDetails.geolocation.lat},${props.editDetails.geolocation.long}&key=${API_KEY}`;
 
 
   const handleNameChange = (e) => {
@@ -159,7 +158,6 @@ const MarketForm = (props) => {
         <button 
           type="submit"
           onClick={async (e) => props.handleCreate(e, prepareBody())}
-          // onClick={async (e) => prepareBody(e)}
           >
           Save
         </button>

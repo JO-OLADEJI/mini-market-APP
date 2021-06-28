@@ -7,17 +7,16 @@ const MarketCard = (props) => {
   const buttonStyle = props.loggedIn ? 'block' : 'none';
   const [address, setAddress] = useState('');
   const API_KEY = 'AIzaSyB9fPxImS5O61BRAAIK5_fjtwBRHPucAWQ';
-  // const GEOCODE_API = '';
   const REVERSE_GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${props.geolocation.lat},${props.geolocation.long}&key=${API_KEY}`;
 
 
-  const formatAddress = async (locationObj) => {
+  const formatAddress = async () => {
     const raw = await fetch(REVERSE_GEOCODE_API);
     const response = await raw.json();
     const address = response.results[0].formatted_address;
     setAddress(address);
   }
-  formatAddress(props.geolocation);
+  formatAddress();
 
 
   return (
@@ -46,7 +45,7 @@ const MarketCard = (props) => {
       <p>double-click</p>
       <i 
         className="fas fa-pencil-alt"
-        onDoubleClick={() => props.handleEdit(props.id)}
+        onDoubleClick={() => props.handleEditView(props.id)}
       />
       <i 
         className="fas fa-trash" 

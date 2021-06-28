@@ -54,7 +54,6 @@
   cursor: pointer;
   color: #F5FAF5;
   font-size: .7rem;
-  /* box-shadow: 0 0 10px #008736e8; */
 }
 
 .search-container input {
@@ -72,7 +71,6 @@
 
 .search-container input:focus {
   outline: none;
-  /* border: 2px solid #008737; */
   border: 2px solid #000000;
 }
 

@@ -15,7 +15,7 @@ import EditForm from './components/EditForm';
 
 function App() {
   // state
-  const emptymarket = { 'name': '', 'category': '', 'foodCategory': '', 'description': '', 'geolocation': { 'lat': 0, 'long': 0 } };
+  const emptymarket = { 'name': '', 'category': '', 'foodCategory': '', 'description': '', 'images': ['', '', ''], 'geolocation': { 'lat': 6.6018, 'long': 3.3515 } };
   const [authToken, setAuthToken] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginPage, setLoginPage] = useState(false);
@@ -29,8 +29,7 @@ function App() {
   const [refresh, setRefresh] = useState(false);
   const [searchCategory, setSearchCategory] = useState('name');
   const createBtnStyle = loggedIn ? 'flex' : 'none';
-  // const API = 'https://market-data-bank.herokuapp.com';
-  const API = 'http://localhost:3001';
+  const API = 'https://market-data-bank.herokuapp.com';
 
 
 
@@ -157,10 +156,9 @@ function App() {
         });
         const response = await raw.json();
         handleShowForm(false);
+        setAllMarkets(null);
+        setMarketToDisplay(null);
         setRefresh(!refresh);
-      }
-      else {
-        // threathen the browser
       }
     }
     catch(error) {
@@ -168,10 +166,37 @@ function App() {
     }
   }
 
-  const handleEdit = (id) => {
+  const handleEditView = (id) => {
     const request = allMarkets.filter(market => market._id === id);
     setEditDetails(request[0]);
     setDisplayEdit(true);
+  }
+
+  const handleUpdate = async (e, id, body) => {
+    try {
+      e.preventDefault();
+      const details = await body;
+      if (details.valid) {
+        const raw = await fetch(`${API}/api/market/${id}`, {
+          method: 'PUT',
+          mode: 'cors',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken
+          },
+          body: JSON.stringify(details.body)
+        });
+        const response = await raw.json();
+        handleShowForm(false);
+        setAllMarkets(null);
+        setMarketToDisplay(null);
+        setRefresh(!refresh);
+      }
+    }
+    catch(error) {
+      alert('An error occured while Updating Market !');
+    }
   }
 
   const handleSearchSubmit = (e) => {
@@ -248,7 +273,7 @@ function App() {
             name={market.name}
             images={market.images}
             loggedIn={loggedIn}
-            handleEdit={handleEdit}
+            handleEditView={handleEditView}
             handleDelete={handleDelete}
             description={market.description}
             category={market.foodCategory}
@@ -269,6 +294,7 @@ function App() {
       <EditForm 
         displayEdit={displayEdit}
         editDetails={editDetails}
+        handleUpdate={handleUpdate}
         handleShowEdit={handleShowEdit}
       />
 
