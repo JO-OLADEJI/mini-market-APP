@@ -433,6 +433,13 @@
   color: white
 }
 
+#MarketForm p {
+  color: white;
+  padding-left: .5rem;
+  font-size: .9rem;
+  height: 1rem;
+}
+
 #MarketForm form {
   width: 30rem;
   background-color: #008737;
@@ -454,6 +461,7 @@
   font-size: .8rem;
   border-radius: 5rem;
   font-family: 'Josefin Sans', sans-serif;
+  transition: all .3s ease-in;
 }
 
 .double {
@@ -499,20 +507,34 @@
   font-weight: bold;
   font-size: .8rem;
   border-radius: .5rem;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
   font-family: 'Josefin Sans', sans-serif;
   resize: none;
-  margin-bottom: 3rem;
+  transition: all .3s ease-in;
+}
+
+#MarketForm input:focus, #MarketForm textarea:focus {
+  outline: none;
+  border: 2px solid #b6b6b6;
+  background-color: #b6b6b6;
 }
 
 #MarketForm button {
   display: block;
-  margin: auto;
+  margin: 3rem auto 0 auto;
   background-color: #ffffff;
   color: #008737;
   font-family: 'Josefin Sans', sans-serif;
-  padding: .8rem 2.5rem;
+  padding: .7rem 2.5rem;
   border-radius: 5rem;
-  border: none;
+  border: 2px solid #ffffff;
   cursor: pointer;
   font-weight: bold;
+  transition: all .3s ease-in;
+}
+
+#MarketForm button:hover {
+  color: #ffffff;
+  background-color: #008737;
 }

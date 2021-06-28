@@ -144,21 +144,27 @@ function App() {
     try {
       e.preventDefault();
       const details = await body;
-      const raw = await fetch(`${API}/api/market`, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-          'auth-token': authToken
-        },
-        body: JSON.stringify(details)
-      });
-      const response = await raw.json();
-      setRefresh(!refresh);
+      if (details.valid) {
+        const raw = await fetch(`${API}/api/market`, {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken
+          },
+          body: JSON.stringify(details.body)
+        });
+        const response = await raw.json();
+        handleShowForm(false);
+        setRefresh(!refresh);
+      }
+      else {
+        // threathen the browser
+      }
     }
     catch(error) {
-      alert('An error occured while getting Markets from DB !');
+      alert('An error occured while creating Market !');
     }
   }
 

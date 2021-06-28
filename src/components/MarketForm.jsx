@@ -11,6 +11,7 @@ const MarketForm = (props) => {
   const [img1, setImg1] = useState('');
   const [img2, setImg2] = useState('');
   const [img3, setImg3] = useState('');
+  const [warning, setWarning] = useState('');
   const API_KEY = 'AIzaSyB9fPxImS5O61BRAAIK5_fjtwBRHPucAWQ';
   const GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`;
   // const REVERSE_GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${props.editDetails.geolocation.lat},${props.editDetails.geolocation.long}&key=${API_KEY}`;
@@ -44,24 +45,61 @@ const MarketForm = (props) => {
     setImg3(e.target.value);
   }
 
-  const prepareBody = async () => {
-    const raw = await fetch(GEOCODE_API);
-    const response = await raw.json();
-    const latitude = await response.results[0].geometry.viewport.southwest.lat;
-    const longitude = await response.results[0].geometry.viewport.southwest.lng;
+  const resetInputs = () => {
+    setName('');
+    setCategory('');
+    setAddress('');
+    setDescription('');
+    setImg1('');
+    setImg2('');
+    setImg3('');
+  }
 
-    const body = {
-      'name': name,
-      'foodCategory': category,
-      'description': description,
-      'images': [img1, img2, img3],
-      'geolocation': {
-        'lat': latitude,
-        'long': longitude
-      }
+  const prepareBody = async () => {
+    setWarning('Loading . . . . .');
+
+    // little validation
+    if (!name) {
+      setWarning('*Enter a valid Name');
+      return { 'valid': false }
     }
-    // console.log(body);
-    return body;
+    else if (!category) {
+      setWarning('*Enter a valid Category');
+      return { 'valid': false }
+    }
+    else if (!(address.length > 5)) {
+      setWarning('*Enter a valid Address');
+      return { 'valid': false }
+    }
+    else if (!description) {
+      setWarning('*Enter a valid Description');
+      return { 'valid': false }
+    }
+
+
+    try {
+      const raw = await fetch(GEOCODE_API);
+      const response = await raw.json();
+      const { lat, lng } = response.results[0].geometry.location;
+
+      const body = {
+        'name': name,
+        'foodCategory': category,
+        'description': description,
+        'images': [img1, img2, img3],
+        'geolocation': {
+          'lat': lat,
+          'long': lng
+        }
+      }
+
+      resetInputs();
+      return { 'valid': true, 'body': body };
+    }
+    catch(error) {
+      alert('An error occured !');
+      return { 'valid': false };
+    }
   }
 
 
@@ -116,10 +154,12 @@ const MarketForm = (props) => {
           value={description}
           onChange={(e) => handleDescChange(e)}
         />
+        <p>{warning}</p>
 
         <button 
           type="submit"
           onClick={async (e) => props.handleCreate(e, prepareBody())}
+          // onClick={async (e) => prepareBody(e)}
           >
           Save
         </button>
