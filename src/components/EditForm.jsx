@@ -20,7 +20,7 @@ const EditForm = (props) => {
   const formatAddress = async () => {
     const raw = await fetch(REVERSE_GEOCODE_API);
     const response = await raw.json();
-    const address = response.results[0].formatted_address;
+    const address = response.results[0] ? response.results[0].formatted_address : "";
     setAddress(address);
   }
 
@@ -143,6 +143,7 @@ const EditForm = (props) => {
           type="text" 
           placeholder="Address" 
           value={address}
+          readOnly={true}
         />
         <div className="image-fields">
           <input 
